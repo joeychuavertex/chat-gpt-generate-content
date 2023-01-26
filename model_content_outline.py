@@ -7,9 +7,11 @@ new_query = """Generate content outline for article or essay or research paper b
 ---
 This is the article: """
 
-def set_openai_key(openai_api_key):
+add_api = st.secrets("api_key")
+
+def set_openai_key():
     """Sets OpenAI key."""
-    openai.api_key = st.secrets("api_key")
+    openai.api_key = add_api
 
 class GeneralModel:
     def __init__(self):

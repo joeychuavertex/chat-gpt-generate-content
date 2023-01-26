@@ -1,13 +1,14 @@
 import streamlit as st
 from model_social_media import GeneralModel
-from main import openai_api_key
+
+add_api = st.secrets("api_key")
 
 def app():
 
     # Creating an object of prediction service
     pred = GeneralModel()
 
-    api_key = st.secrets("api_key")
+    api_key = add_api
 
     # Using the streamlit cache
     @st.cache
