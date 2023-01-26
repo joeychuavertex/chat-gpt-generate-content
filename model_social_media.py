@@ -1,4 +1,5 @@
 import openai
+from main import openai_api_key
 
 new_query = """Generate social media posts based on: 
 ---
@@ -6,9 +7,11 @@ new_query = """Generate social media posts based on:
 ---
 This is the article: """
 
-def set_openai_key(key):
+
+def set_openai_key(openai_api_key):
     """Sets OpenAI key."""
-    openai.api_key = key
+    openai.api_key = openai_api_key
+
 
 class GeneralModel:
     def __init__(self):
@@ -32,10 +35,8 @@ class GeneralModel:
             "stop": ["###"],
         }
 
-
         for kwarg in myKwargs:
             kwargs[kwarg] = myKwargs[kwarg]
-
 
         r = openai.Completion.create(prompt=prompt, **kwargs)["choices"][0][
             "text"
@@ -48,5 +49,5 @@ class GeneralModel:
         """
         # Setting the OpenAI API key got from the OpenAI dashboard
         set_openai_key(api_key)
-        output = self.query(new_query.format(input = input))
+        output = self.query(new_query.format(input=input))
         return output

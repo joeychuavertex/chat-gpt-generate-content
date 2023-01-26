@@ -6,5 +6,4 @@ def openai_api_key():
     return api_key
 
 
-st.title("API Key:")
-st.text_input()
+st.title("Communications with GPT-3")
