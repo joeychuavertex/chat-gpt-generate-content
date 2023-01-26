@@ -15,27 +15,20 @@ openai.api_key = st.secrets["api_key"]
 # Use streamlit to create a text input for the user's query
 query = st.text_input("Enter your news query:")
 
-# Set the parameters for the GPT-3 model
-model_engine = "text-davinci-003"
-prompt = f"Find top 20 related search terms for news based on keyword: {query}"
-max_tokens = 1024
-n = 5
-stop = None
-temperature = 0.7
-
 # Send the query to GPT-3
-completions = openai.Completion.create(
-    engine=model_engine,
-    prompt=prompt,
-    max_tokens=max_tokens,
-    n=n,
-    stop=stop,
-    temperature=temperature,
+search_terms_model = openai.Completion.create(
+    engine="text-davinci-003",
+    prompt=f"Find top 20 related search terms for news based on keyword: {query}",
+    max_tokens=1024,
+    n=5,
+    stop=None,
+    temperature=0.7,
 )
+
 
 # Use streamlit to display the related search terms
 st.write("Related search terms:")
-related_result = completions.choices[0].text.split("\n")[2:]
+related_result = search_terms_model.choices[0].text.split("\n")[2:]
 new_related_result = set()
 for item in related_result:
     new_item = item.strip("1234567890. ")
@@ -67,10 +60,22 @@ for article in news_result[:20]:
             article_summary = article.summary
             article_image = article.top_image
             st.markdown(f'[{article_title}]({article_link})')
+            st.write(article_publish_date)
             if article_image:
                 st.image(article_image)
-            st.write(article_summary)
-            st.write(article_publish_date)
+            st.write(f"Provided summary:{article_summary}")
+
+            news_model = openai.Completion.create(
+                model="text-davinci-003",
+                prompt=f"Summarise the article {article_text}",
+                temperature=0.3,
+                max_tokens=500,
+                top_p=1,
+                frequency_penalty=0,
+                presence_penalty=0
+            )
+            result = news_model.choices[0]['text']
+            st.write(f"GPT-3 summary:{article_text}")
 
             # NER
             doc = nlp(article_text)
@@ -79,6 +84,7 @@ for article in news_result[:20]:
             df = df.drop_duplicates()
             df = df.loc[df['Label'].isin(['PERSON', 'ORG', 'PRODUCT'])]
             st.write(df)
+
 
         except:
             article_text = "Unable to extract article text."
