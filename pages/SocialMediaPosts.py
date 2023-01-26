@@ -4,7 +4,7 @@ import streamlit as st
 openai.api_key = st.secrets["api_key"]
 
 st.title("Social Media Posts")
-input = st.text_area("Suggest social media posts:", placeholder="Venture Capital")
+input = st.text_input("Suggest social media posts:", placeholder="Venture Capital")
 
 response = openai.Completion.create(
   model="text-davinci-003",
