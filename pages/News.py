@@ -74,8 +74,22 @@ for article in news_result[:20]:
                 frequency_penalty=0,
                 presence_penalty=1
             )
-            result = news_model.choices[0]['text']
-            st.write(f"GPT-3 summary:{result}")
+            news_result = news_model.choices[0]['text']
+            st.write(f"GPT-3 summary:{news_result}")
+
+            # Classification
+            shortened_article_text = article.summary[0:200]
+            response = openai.Completion.create(
+                engine="text-davinci-003",
+                prompt=f"The following is an article and the categories it falls into: {shortened_article_text} Category: \n\n",
+                temperature=0,
+                max_tokens=4000,
+                top_p=1,
+                frequency_penalty=1,
+                presence_penalty=1
+            )
+            classification_result = response.choices[0]["text"]
+            st.write(f"News Category:{classification_result}")
 
             # NER
             doc = nlp(article_text)
@@ -83,7 +97,9 @@ for article in news_result[:20]:
             df = pd.DataFrame(ents, columns=["Entity", "Label"])
             df = df.drop_duplicates()
             df = df.loc[df['Label'].isin(['PERSON', 'ORG', 'PRODUCT'])]
+            st.write("Extract Person, Organization and Product")
             st.write(df)
+
 
 
         except:
