@@ -60,7 +60,7 @@ for article in news_result[:20]:
             article_summary = article.summary
             article_image = article.top_image
             st.markdown(f'[{article_title}]({article_link})')
-            st.write(article_publish_date)
+            # st.write(article_publish_date)
             if article_image:
                 st.image(article_image)
             st.markdown(f"**Provided summary:** {article_summary}")
@@ -97,7 +97,7 @@ for article in news_result[:20]:
             df = pd.DataFrame(ents, columns=["Entity", "Label"])
             df = df.drop_duplicates()
             df = df.loc[df['Label'].isin(['PERSON', 'ORG', 'PRODUCT'])]
-            st.markdown("**Extract Person, Organization and Product**")
+            st.markdown("**Extracted Person, Organization and Product**")
             st.write(df)
 
 

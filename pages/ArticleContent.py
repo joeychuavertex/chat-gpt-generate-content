@@ -4,7 +4,7 @@ import streamlit as st
 openai.api_key = st.secrets["api_key"]
 
 st.title("Article Content Generator")
-input = st.text_input("Generate article content based on:")
+input = st.text_input("Generate article content based on:", placeholder="Venture Capital")
 
 response = openai.Completion.create(
   model="text-davinci-003",
