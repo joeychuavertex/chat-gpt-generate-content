@@ -63,7 +63,7 @@ for article in news_result[:20]:
             st.write(article_publish_date)
             if article_image:
                 st.image(article_image)
-            st.markdown(f"Provided summary:{article_summary}")
+            st.markdown(f"**Provided summary:** {article_summary}")
 
             news_model = openai.Completion.create(
                 model="text-davinci-003",
@@ -75,7 +75,7 @@ for article in news_result[:20]:
                 presence_penalty=1
             )
             news_result = news_model.choices[0]['text']
-            st.write(f"GPT-3 summary:{news_result}")
+            st.markdown(f"**GPT-3 summary:** {news_result}")
 
             # Classification
             shortened_article_text = article.summary[0:200]
@@ -89,7 +89,7 @@ for article in news_result[:20]:
                 presence_penalty=1
             )
             classification_result = response.choices[0]["text"]
-            st.write(f"News Category:{classification_result}")
+            st.markdown(f"**News Category:**{classification_result}")
 
             # NER
             doc = nlp(article_text)
@@ -97,7 +97,7 @@ for article in news_result[:20]:
             df = pd.DataFrame(ents, columns=["Entity", "Label"])
             df = df.drop_duplicates()
             df = df.loc[df['Label'].isin(['PERSON', 'ORG', 'PRODUCT'])]
-            st.write("Extract Person, Organization and Product")
+            st.markdown("**Extract Person, Organization and Product**")
             st.write(df)
 
 
