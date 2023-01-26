@@ -63,19 +63,19 @@ for article in news_result[:20]:
             st.write(article_publish_date)
             if article_image:
                 st.image(article_image)
-            st.write(f"Provided summary:{article_summary}")
+            st.markdown(f"Provided summary:{article_summary}")
 
             news_model = openai.Completion.create(
                 model="text-davinci-003",
-                prompt=f"Summarise the article {article_text}",
-                temperature=0.3,
-                max_tokens=500,
+                prompt=f"{article_text} \n\nTl;dr",
+                temperature=0.7,
+                max_tokens=200,
                 top_p=1,
                 frequency_penalty=0,
-                presence_penalty=0
+                presence_penalty=1
             )
             result = news_model.choices[0]['text']
-            st.write(f"GPT-3 summary:{article_text}")
+            st.write(f"GPT-3 summary:{result}")
 
             # NER
             doc = nlp(article_text)
