@@ -1,5 +1,6 @@
 import streamlit as st
 from model_art_description import GeneralModel
+import api_
 
 
 def app():
@@ -7,7 +8,7 @@ def app():
     # Creating an object of prediction service
     pred = GeneralModel()
 
-    api_key = st.sidebar.text_input("APIkey", type="password")
+    api_key = st.sidebar.text_input(st.secrets, type="password")
 
     # Using the streamlit cache
     @st.cache
