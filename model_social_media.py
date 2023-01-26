@@ -1,6 +1,6 @@
 import openai
 
-query = """Generate social media posts based on: 
+new_query = """Generate social media posts based on: 
 ---
 {input}
 ---
@@ -48,5 +48,5 @@ class GeneralModel:
         """
         # Setting the OpenAI API key got from the OpenAI dashboard
         set_openai_key(api_key)
-        output = self.query(query.format(input = input))
+        output = self.query(new_query.format(input = input))
         return output
