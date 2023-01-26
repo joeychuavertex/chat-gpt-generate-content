@@ -15,4 +15,4 @@ response = openai.Completion.create(
 )
 
 
-st.write(response.choices[0])
+st.write(response.choices[0]['text'])
