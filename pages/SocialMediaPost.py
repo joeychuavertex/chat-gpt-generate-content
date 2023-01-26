@@ -7,7 +7,7 @@ def app():
     # Creating an object of prediction service
     pred = GeneralModel()
 
-    api_key = openai_api_key
+    api_key = st.secrets("api_key")
 
     # Using the streamlit cache
     @st.cache

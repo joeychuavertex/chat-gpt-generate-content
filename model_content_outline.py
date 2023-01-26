@@ -1,5 +1,5 @@
 import openai
-from main import openai_api_key
+import streamlit as st
 
 new_query = """Generate content outline for article or essay or research paper based on: 
 ---
@@ -9,7 +9,7 @@ This is the article: """
 
 def set_openai_key(openai_api_key):
     """Sets OpenAI key."""
-    openai.api_key = openai_api_key
+    openai.api_key = st.secrets("api_key")
 
 class GeneralModel:
     def __init__(self):

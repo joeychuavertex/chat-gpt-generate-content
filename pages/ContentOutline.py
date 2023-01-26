@@ -1,6 +1,5 @@
 import streamlit as st
 from model_content_outline import GeneralModel
-from main import openai_api_key
 
 def app():
 
@@ -8,7 +7,7 @@ def app():
     pred = GeneralModel()
 
     # api_key = st.sidebar.text_input("APIkey", type="password")
-    api_key = openai_api_key
+    api_key = st.secrets("api_key")
 
     # Using the streamlit cache
     @st.cache
