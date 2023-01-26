@@ -8,7 +8,7 @@ def app():
     pred = GeneralModel()
 
     # api_key = st.sidebar.text_input("APIkey", type="password")
-    api_key = st.secrets("api_key")
+    api_key = st.sidebar.text_input("APIkey", type="password")
 
     # Using the streamlit cache
     @st.cache
@@ -38,6 +38,6 @@ def app():
     else:
         st.error("🔑 Please enter API Key")
 
-st.set_page_config(page_title="GPT-3 Boilerplate", page_icon=":shark:", layout="wide")
+st.set_page_config(page_title="GPT-3 for Comms", page_icon=":shark:", layout="wide")
 
 app()
