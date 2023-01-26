@@ -18,3 +18,15 @@ response = openai.Completion.create(
 
 
 st.write(response.choices[0]['text'])
+
+
+kwargs = {
+             "engine": "text-davinci-003",
+             "temperature": 0.85,
+             "max_tokens": 600,
+             "best_of": 1,
+             "top_p": 1,
+             "frequency_penalty": 0,
+             "presence_penalty": 0,
+             "stop": ["###"],
+         }
