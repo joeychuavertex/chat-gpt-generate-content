@@ -4,3 +4,4 @@ pandas~=1.5.3
 nltk~=3.8.1
 GoogleNews~=1.6.6
 spacy~=3.5.0
+newspaper3k
