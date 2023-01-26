@@ -69,7 +69,7 @@ for article in news_result[:20]:
                 model="text-davinci-003",
                 prompt=f"{article_text} \n\nTl;dr",
                 temperature=0.7,
-                max_tokens=200,
+                max_tokens=100,
                 top_p=1,
                 frequency_penalty=0,
                 presence_penalty=1
