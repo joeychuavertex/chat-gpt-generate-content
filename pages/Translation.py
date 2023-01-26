@@ -4,7 +4,7 @@ import streamlit as st
 openai.api_key = st.secrets["api_key"]
 
 st.title("Translation")
-input = st.text_input("Enter text for translation into Chinese, Japanese, Korean")
+input = st.text_area("Enter text for translation into Chinese, Japanese, Korean")
 
 response = openai.Completion.create(
   model="text-davinci-003",
