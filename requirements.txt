@@ -1,2 +1,5 @@
 streamlit~=1.17.0
 openai~=0.26.3
+pandas~=1.5.3
+nltk~=3.8.1
+GoogleNews~=1.6.6
