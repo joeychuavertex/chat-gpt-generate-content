@@ -81,7 +81,7 @@ for article in news_result[:20]:
             shortened_article_text = article.summary[0:200]
             response = openai.Completion.create(
                 engine="text-davinci-003",
-                prompt=f"The following is an article and the categories it falls into: {shortened_article_text} Category: \n\n",
+                prompt=f"The following is the categories it falls into: {shortened_article_text} Category: \n\n",
                 temperature=0,
                 max_tokens=4000,
                 top_p=1,
@@ -89,7 +89,7 @@ for article in news_result[:20]:
                 presence_penalty=1
             )
             classification_result = response.choices[0]["text"]
-            st.markdown(f"**News Category:**{classification_result}")
+            st.markdown(f"**News Category:** {classification_result}")
 
             # NER
             doc = nlp(article_text)
